@@ -21,9 +21,9 @@ RSpec.describe UsersController, type: :controller do
 
     describe "#show" do 
         it "if successful, redirect to a show page" do 
-            User.create!(username: "superman", password: "password", id: 1)
-            get :show, params: { id: 1 } 
-            expect(response).to redirect_to(user_url(1))
+            user = User.create!(username: Faker::Superhero.name, password: "password")
+            get :show, params: { id: user.id } 
+            expect(response).to redirect_to(user_url(user.id))
         end
         it "not successful" do 
             begin

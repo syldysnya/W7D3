@@ -14,7 +14,7 @@ class User < ApplicationRecord
     end
 
     def ensure_session_token
-        self.session_token ||= SecureRandom.urlsafe_base64
+        self.session_token ||= User.generate_session_token
     end
 
     def self.find_by_credentials(username, password)
@@ -31,11 +31,11 @@ class User < ApplicationRecord
         pw_obj.is_password?(password)
     end
 
-    def generate_session_token 
-
+    def self.generate_session_token 
+        SecureRandom.urlsafe_base64
     end
 
     def reset_session_token!
-
+        
     end
 end
